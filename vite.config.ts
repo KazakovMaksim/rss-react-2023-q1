@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       components: '/src/components',
       assets: '/src/assets',
+      data: '/src/data',
     },
   },
   test: {
