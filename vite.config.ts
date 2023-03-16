@@ -13,6 +13,7 @@ export default defineConfig({
       components: '/src/components',
       assets: '/src/assets',
       data: '/src/data',
+      constants: '/src/constants',
     },
   },
   test: {
