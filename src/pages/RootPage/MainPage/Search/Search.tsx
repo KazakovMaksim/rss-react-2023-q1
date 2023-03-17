@@ -9,7 +9,7 @@ type InputState = {
   readonly value: string;
 };
 
-class ControlSearch extends React.Component<object, InputState> {
+class Search extends React.Component<object, InputState> {
   constructor(props: object) {
     super(props);
 
@@ -24,6 +24,7 @@ class ControlSearch extends React.Component<object, InputState> {
 
   render() {
     const { value } = this.state;
+
     return (
       <div className={styles.search}>
         <Input
@@ -38,4 +39,4 @@ class ControlSearch extends React.Component<object, InputState> {
   }
 }
 
-export default ControlSearch;
+export default Search;
