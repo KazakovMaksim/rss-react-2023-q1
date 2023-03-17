@@ -10,6 +10,19 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCh
 };
 
 class Input extends React.PureComponent<InputProps> {
+  componentDidMount() {
+    const inputValueLS = localStorage.getItem('inputValueLS');
+    const { onChange } = this.props;
+    if (inputValueLS) {
+      onChange(inputValueLS);
+    }
+  }
+
+  componentWillUnmount() {
+    const { value } = this.props;
+    localStorage.setItem('inputValueLS', value);
+  }
+
   render() {
     const { className, disabled, value, onChange } = this.props;
 
