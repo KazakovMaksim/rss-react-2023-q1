@@ -3,6 +3,7 @@ import Card from 'components/Card';
 import cardsData from 'data';
 
 import styles from './MainPage.module.scss';
+import Search from './Search';
 
 class MainPage extends React.PureComponent {
   render() {
@@ -16,7 +17,12 @@ class MainPage extends React.PureComponent {
       />
     ));
 
-    return <main className={styles.main}>{cards}</main>;
+    return (
+      <main className={styles.main}>
+        <Search />
+        {cards}
+      </main>
+    );
   }
 }
 
