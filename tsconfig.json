@@ -21,6 +21,7 @@
       "data/*": ["data/*"],
       "assets/*": ["assets/*"],
       "constants/*": ["constants/*"],
+      "styles/*": ["styles/*"],
     }
   },
   "include": [
