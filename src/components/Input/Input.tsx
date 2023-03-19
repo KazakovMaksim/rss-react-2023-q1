@@ -6,6 +6,7 @@ import styles from './Input.module.scss';
 
 export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
   value: string;
+  dataAtr?: string;
   onChange: (value: string) => void;
 };
 
@@ -24,10 +25,11 @@ class Input extends React.PureComponent<InputProps> {
   }
 
   render() {
-    const { className, disabled, value, onChange } = this.props;
+    const { className, disabled, value, onChange, dataAtr } = this.props;
 
     return (
       <input
+        data-testid={dataAtr}
         type="text"
         className={classnames(className, styles.input, {
           input_disabled: disabled === true,
