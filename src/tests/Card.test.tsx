@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Card from 'components/Card/';
-import { CARD_DESCRIPTION, CARD_TITLE, CARD_PRICE, Locators } from './constants';
+import { CARD_DESCRIPTION, CARD_TITLE, CARD_PRICE } from './constants';
 
 describe('Testing Card Component', () => {
   test('Props title, description throwing and displaying', () => {
