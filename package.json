@@ -11,7 +11,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --fix",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "classnames": "^2.3.2",
