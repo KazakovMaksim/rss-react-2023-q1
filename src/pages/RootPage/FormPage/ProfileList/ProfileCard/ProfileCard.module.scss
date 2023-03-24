@@ -1,0 +1,33 @@
+@import 'styles/variables.scss';
+
+.card {
+  border: 1px solid $grey;
+  border-radius: 5px;
+  max-width: 300px;
+  font-size: 14px;
+  padding: 10px;
+  
+  &>div>div {
+    padding: 3px;
+    text-align: left;
+  }
+
+  &>img {
+    padding: 5px;
+    border-radius: 10px;
+    max-width: 255px;
+  }
+
+  &>div:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  &_btn {
+    padding: 5px;
+    font-weight: initial;
+    font-size: 14px;
+  }
+}
