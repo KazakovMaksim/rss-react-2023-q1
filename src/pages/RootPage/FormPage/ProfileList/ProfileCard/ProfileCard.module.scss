@@ -7,18 +7,18 @@
   font-size: 14px;
   padding: 10px;
   
-  &>div>div {
+  & > div > div {
     padding: 3px;
     text-align: left;
   }
 
-  &>img {
+  & > img {
     padding: 5px;
     border-radius: 10px;
     max-width: 255px;
   }
 
-  &>div:last-child {
+  & > div:last-child {
     display: flex;
     justify-content: center;
     gap: 10px;
