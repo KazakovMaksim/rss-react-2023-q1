@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { NavLink } from 'react-router-dom';
-import headerLinks from 'constants/index';
+import { headerLinks } from 'constants/index';
 
 import styles from './NavBar.module.scss';
 
