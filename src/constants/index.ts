@@ -9,3 +9,5 @@ export const userDefaultImg = {
   female:
     'https://www.shutterstock.com/image-vector/avatar-profile-female-face-silhouette-600w-471975109.jpg',
 };
+
+export const formExtra = ['ready to get alerts', 'ready to receive ads'];
