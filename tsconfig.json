@@ -23,6 +23,7 @@
       "constants/*": ["constants/*"],
       "styles/*": ["styles/*"],
       "types/*": ["types/*"],
+      "utils/*": ["utils/*"],
     }
   },
   "include": [

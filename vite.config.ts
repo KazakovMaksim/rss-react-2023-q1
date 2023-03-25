@@ -16,6 +16,7 @@ export default defineConfig({
       constants: '/src/constants',
       styles: '/src/styles',
       types: '/src/types',
+      utils: '/src/utils',
     },
   },
   test: {
