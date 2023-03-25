@@ -1,10 +1,17 @@
-enum FormFields {
-  User = 'user',
-  Phone = 'phone',
-  Email = 'email',
-  Gender = 'gender',
-  Extra = 'extra',
-  Age = 'age',
+export enum FormFields {
+  User = 'User',
+  Phone = 'Phone',
+  Email = 'Email',
+  Gender = 'Gender',
+  Extra = 'Extra',
+  Birthday = 'Birthday',
 }
 
-export default FormFields;
+export type FormDataItem = {
+  user: string;
+  phone: string;
+  email: string;
+  gender: string;
+  birthday: string;
+  extra: string;
+};

@@ -2,33 +2,25 @@ import React from 'react';
 import Button from 'components/Button';
 
 import { userDefaultImg } from 'constants/index';
-import FormFields from 'types/index';
+import { FormDataItem, FormFields } from 'types';
 import styles from './ProfileCard.module.scss';
 import Clause from './Clause';
 
-type FormDataState = {
-  user: string;
-  gender: string;
-};
-
-class DeliveryCard extends React.PureComponent<FormDataState> {
+class DeliveryCard extends React.PureComponent<FormDataItem> {
   render() {
-    const { user, gender } = this.props;
+    const { user, phone, email, gender, birthday, extra } = this.props;
     const imgSrc = gender === 'male' ? userDefaultImg.male : userDefaultImg.female;
 
     return (
       <div key={user} className={styles.card}>
         <h3>Personal data</h3>
         <div>
-          <Clause clauseName={FormFields.User} clauseText={`${user}`} />
-          <Clause clauseName={FormFields.Phone} clauseText="9273608767" />
-          <Clause clauseName={FormFields.Email} clauseText="cash@mail.ru" />
+          <Clause clauseName={FormFields.User} clauseText={user} />
+          <Clause clauseName={FormFields.Phone} clauseText={phone} />
+          <Clause clauseName={FormFields.Email} clauseText={email} />
           <Clause clauseName={FormFields.Gender} clauseText={gender} />
-          <Clause clauseName={FormFields.Age} clauseText="30" />
-          <Clause
-            clauseName={FormFields.Extra}
-            clauseText="ready get alerts, ready to receive ads"
-          />
+          <Clause clauseName={FormFields.Birthday} clauseText={birthday} />
+          <Clause clauseName={FormFields.Extra} clauseText={extra} />
         </div>
         <img src={imgSrc} alt="user profile" />
         <div>
