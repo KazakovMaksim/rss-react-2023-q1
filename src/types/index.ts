@@ -14,4 +14,5 @@ export type FormDataItem = {
   gender: string;
   birthday: string;
   extra: string;
+  file: string;
 };
