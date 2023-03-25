@@ -1,7 +1,7 @@
 export const headerLinks = [
   { name: 'Home', path: '/' },
   { name: 'About Us', path: '/about' },
-  { name: 'Form Fill', path: '/form' },
+  { name: 'Profile', path: '/form' },
 ];
 
 export const userDefaultImg = {
