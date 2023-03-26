@@ -19,6 +19,7 @@ type FormState = {
   extraErr: string;
   fileErr: string;
   file: File | null;
+  isSubmit: boolean;
 };
 
 class Form extends React.PureComponent<FormProps, FormState> {
@@ -68,6 +69,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       extraErr: '',
       fileErr: '',
       file: null,
+      isSubmit: false,
     };
   }
 
@@ -126,17 +128,21 @@ class Form extends React.PureComponent<FormProps, FormState> {
       !extraErr &&
       !fileErr
     ) {
-      handle({
-        user: this.formUser.current?.value as string,
-        phone: this.formPhone.current?.value as string,
-        email: this.formEmail.current?.value as string,
-        gender,
-        tariff: this.formTariff.current?.value as string,
-        birthday: this.formBirthday.current?.value as string,
-        extra: extra.filter((el) => el !== '').join(', '),
-        file: file as File,
-      });
-      this.formInput.current?.reset();
+      this.setState({ isSubmit: true });
+      setTimeout(() => {
+        this.setState({ isSubmit: false });
+        handle({
+          user: this.formUser.current?.value as string,
+          phone: this.formPhone.current?.value as string,
+          email: this.formEmail.current?.value as string,
+          gender,
+          tariff: this.formTariff.current?.value as string,
+          birthday: this.formBirthday.current?.value as string,
+          extra: extra.filter((el) => el !== '').join(', '),
+          file: file as File,
+        });
+        this.formInput.current?.reset();
+      }, 1000);
     }
   };
 
@@ -147,8 +153,17 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
   render() {
     const [alertsText, adsText] = formExtra;
-    const { userErr, phoneErr, emailErr, genderErr, tariffErr, birthErr, extraErr, fileErr } =
-      this.state;
+    const {
+      userErr,
+      phoneErr,
+      emailErr,
+      genderErr,
+      tariffErr,
+      birthErr,
+      extraErr,
+      fileErr,
+      isSubmit,
+    } = this.state;
 
     return (
       <form
@@ -159,6 +174,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
           this.handleSubmit();
         }}
       >
+        {isSubmit && <div className={styles.form_confirm}>All data saved</div>}
         <label htmlFor="user">
           Full name
           <input placeholder="enter your full name" ref={this.formUser} />
