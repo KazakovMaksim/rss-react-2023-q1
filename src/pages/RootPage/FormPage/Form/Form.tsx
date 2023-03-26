@@ -18,6 +18,7 @@ type FormState = {
   tariffErr: string;
   extraErr: string;
   fileErr: string;
+  file: File | null;
 };
 
 class Form extends React.PureComponent<FormProps, FormState> {
@@ -66,6 +67,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       tariffErr: '',
       extraErr: '',
       fileErr: '',
+      file: null,
     };
   }
 
@@ -91,8 +93,6 @@ class Form extends React.PureComponent<FormProps, FormState> {
       }
     );
 
-    console.log('formFile', this.formFile.current?.value);
-
     const userErr = validateField('user', this.formUser.current?.value);
     const phoneErr = validateField('phone', this.formPhone.current?.value);
     const emailErr = validateField('email', this.formEmail.current?.value);
@@ -114,6 +114,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
     });
 
     const { handle } = this.props;
+    const { file } = this.state;
 
     if (
       !userErr &&
@@ -130,12 +131,18 @@ class Form extends React.PureComponent<FormProps, FormState> {
         phone: this.formPhone.current?.value as string,
         email: this.formEmail.current?.value as string,
         gender,
+        tariff: this.formTariff.current?.value as string,
         birthday: this.formBirthday.current?.value as string,
         extra: extra.filter((el) => el !== '').join(', '),
-        file: this.formFile.current?.value as string,
+        file: file as File,
       });
       this.formInput.current?.reset();
     }
+  };
+
+  handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = (e.target.files as FileList)[0] as File;
+    this.setState({ file });
   };
 
   render() {
@@ -217,7 +224,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
         <label htmlFor="file">
           File
-          <input type="file" ref={this.formFile} />
+          <input type="file" ref={this.formFile} onChange={(e) => this.handleOnChange(e)} />
         </label>
         {fileErr && <span className={styles.form_error}>{fileErr}</span>}
 
