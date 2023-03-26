@@ -12,8 +12,7 @@ class ProfileList extends React.PureComponent<CardsItems> {
   render() {
     const { cards } = this.props;
     const list = cards.map((card: FormDataItem) => {
-      const { user } = card;
-      return <ProfileCard key={user} card={card} />;
+      return <ProfileCard key={crypto.randomUUID()} card={card} />;
     });
     const deliveryList = cards.length ? list : <div>profiles list is still empty</div>;
 
