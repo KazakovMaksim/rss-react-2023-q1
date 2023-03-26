@@ -12,5 +12,6 @@ export const validation = {
   phoneMinLength: 9,
   fileType: 'image/jpeg',
   userPattern: /^[A-Z]/,
+  phonePattern: /[0-9]{9}/,
   emailPattern: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_-]+)(\.[a-zA-Z]{2,5}){1,2}$/,
 };
