@@ -1,11 +1,11 @@
 export enum FormFields {
-  User = 'User',
-  Phone = 'Phone',
-  Email = 'Email',
-  Gender = 'Gender',
-  Extra = 'Extra',
-  Birthday = 'Birthday',
-  Tariff = 'Tariff',
+  User = 'user',
+  Phone = 'phone',
+  Email = 'email',
+  Gender = 'gender',
+  Extra = 'extra',
+  Birthday = 'birthday',
+  Tariff = 'tariff',
 }
 
 export type FormDataItem = {
