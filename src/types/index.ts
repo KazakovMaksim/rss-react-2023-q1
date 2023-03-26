@@ -5,6 +5,7 @@ export enum FormFields {
   Gender = 'Gender',
   Extra = 'Extra',
   Birthday = 'Birthday',
+  Tariff = 'Tariff',
 }
 
 export type FormDataItem = {
@@ -13,6 +14,7 @@ export type FormDataItem = {
   email: string;
   gender: string;
   birthday: string;
+  tariff: string;
   extra: string;
-  file: string;
+  file: File;
 };
