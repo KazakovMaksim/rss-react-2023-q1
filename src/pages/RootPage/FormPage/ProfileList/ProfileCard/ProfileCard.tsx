@@ -1,18 +1,21 @@
 import React from 'react';
 import Button from 'components/Button';
 
-import { userDefaultImg } from 'constants/index';
 import { FormDataItem, FormFields } from 'types';
 import styles from './ProfileCard.module.scss';
 import Clause from './Clause';
 
-class DeliveryCard extends React.PureComponent<FormDataItem> {
+type ProfileCardProp = {
+  card: FormDataItem;
+};
+
+class ProfileCard extends React.PureComponent<ProfileCardProp> {
   render() {
-    const { user, phone, email, gender, birthday, extra } = this.props;
-    const imgSrc = gender === 'male' ? userDefaultImg.male : userDefaultImg.female;
+    const { card } = this.props;
+    const { user, phone, email, gender, birthday, extra, tariff, file } = card;
 
     return (
-      <div key={user} className={styles.card}>
+      <div className={styles.card}>
         <h3>Personal data</h3>
         <div>
           <Clause clauseName={FormFields.User} clauseText={user} />
@@ -20,9 +23,10 @@ class DeliveryCard extends React.PureComponent<FormDataItem> {
           <Clause clauseName={FormFields.Email} clauseText={email} />
           <Clause clauseName={FormFields.Gender} clauseText={gender} />
           <Clause clauseName={FormFields.Birthday} clauseText={birthday} />
+          <Clause clauseName={FormFields.Tariff} clauseText={tariff} />
           <Clause clauseName={FormFields.Extra} clauseText={extra} />
         </div>
-        <img src={imgSrc} alt="user profile" />
+        <img src={URL.createObjectURL(file)} alt="user profile" />
         <div>
           <Button className={styles.card_btn}>delete</Button>
           <Button className={styles.card_btn}>change</Button>
@@ -32,4 +36,4 @@ class DeliveryCard extends React.PureComponent<FormDataItem> {
   }
 }
 
-export default DeliveryCard;
+export default ProfileCard;
