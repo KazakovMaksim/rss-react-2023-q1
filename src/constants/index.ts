@@ -7,5 +7,10 @@ export const headerLinks = [
 export const formExtra = ['ready to get alerts', 'ready to receive ads'];
 
 export const validation = {
-  userMinLength: 4,
+  userMinWordsNum: 2,
+  userMinLength: 3,
+  phoneMinLength: 9,
+  fileType: 'image/jpeg',
+  userPattern: /^[A-Z]/,
+  emailPattern: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_-]+)(\.[a-zA-Z]{2,5}){1,2}$/,
 };

@@ -167,6 +167,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     return (
       <form
+        noValidate
         className={styles.form}
         ref={this.formInput}
         onSubmit={(e) => {
@@ -176,8 +177,8 @@ class Form extends React.PureComponent<FormProps, FormState> {
       >
         {isSubmit && <div className={styles.form_confirm}>All data saved</div>}
         <label htmlFor="user">
-          Full name
-          <input placeholder="enter your full name" ref={this.formUser} />
+          User
+          <input placeholder="enter your user name" ref={this.formUser} />
         </label>
         {userErr && <span className={styles.form_error}>{userErr}</span>}
 
