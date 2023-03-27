@@ -51,7 +51,7 @@ describe('Testing for Input component', () => {
     render(<Input value="h" onChange={() => {}} />);
     const input = screen.getByRole('textbox');
     test('user change data', async () => {
-      await userEvent.type(inputElement, '34');
+      await userEvent.type(input, '34');
       expect(onChangeInput).toBeCalledWith('h34');
     });
   });
