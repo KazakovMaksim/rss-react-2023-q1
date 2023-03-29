@@ -1,0 +1,42 @@
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
+
+.button {
+  @include font(18px, 130%, 700);
+  padding: 15px 28px 16px;
+  display: flex;
+  background: $green;
+  border: none;
+  text-align: center;
+  color: $white;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &_disabled {
+    background: $white-btn;
+    line-height: 130%;
+    cursor: initial;
+  }
+
+  &_loader {
+    opacity: 0.4;
+    border-color: $blue-btn;
+    border-right-color: transparent;
+    margin-right: 18px;
+  }
+
+  &_loading {
+    padding-left: 20.18px;
+  }
+  
+  &_disabled:hover {
+    opacity: initial;
+  }
+
+}
+
+
+

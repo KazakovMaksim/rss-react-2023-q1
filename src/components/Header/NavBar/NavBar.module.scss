@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &>li {
+    font-size: 18px;
+    line-height: 180%;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      padding-right: 60px;
+    }
+
+  }
+
+  &>li>a {
+    position: relative;
+  }
+
+}
+.active::after {
+  position: absolute;
+  content: '';
+  height: 3px;
+  width: 100%;
+  left: 0;
+  top: 25px;
+  background-color: #518581;
+  z-index: 2;
+}

@@ -1,0 +1,20 @@
+@import 'styles/variables.scss';
+
+.search{
+  position: relative;
+  max-width: 1020px;
+
+  &_input {
+    width: 1020px;
+    padding-left: 75px;
+    box-shadow: 0px 4px 20px $shadow;
+  }
+
+  &_btn {
+    position: absolute;
+    right: 28px;
+    top: calc(50% - 27px);
+    font-family: 'Eudoxus Sans';
+  }
+
+}
