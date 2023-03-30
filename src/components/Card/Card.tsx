@@ -10,11 +10,10 @@ export type CardProps = {
   onClick?: React.MouseEventHandler;
 };
 
-class Card extends React.PureComponent<CardProps> {
-  render() {
-    const { imgSrc, title, description, price } = this.props;
+const Card = (props: CardProps) => {
+  const { imgSrc, title, description, price } = props;
 
-    return (
+  return (
       <div className={styles.card}>
         <div>
           <img src={imgSrc} alt="" />
@@ -24,7 +23,6 @@ class Card extends React.PureComponent<CardProps> {
         <p>{`$${price}`}</p>
       </div>
     );
-  }
 }
 
 export default Card;
