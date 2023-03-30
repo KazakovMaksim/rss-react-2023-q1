@@ -6,16 +6,8 @@ type WrapperProps = {
   children: React.ReactNode;
 };
 
-class Wrapper extends React.PureComponent {
-  children: React.ReactNode;
-
-  constructor(props: WrapperProps) {
-    super(props);
-    this.children = props.children;
-  }
-
-  render() {
-    return <div className={styles.wrapper}>{this.children}</div>;
-  }
+const Wrapper = ({children}: WrapperProps) => {
+  return <div className={styles.wrapper}>{children}</div>;
 }
+
 export default Wrapper;
