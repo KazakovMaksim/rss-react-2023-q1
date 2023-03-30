@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classnames from 'classnames';
+import cn from 'classnames';
 
 import styles from './Input.module.scss';
 
@@ -10,36 +10,21 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCh
   onChange: (value: string) => void;
 };
 
-class Input extends React.PureComponent<InputProps> {
-  componentDidMount() {
-    const inputValueLS = localStorage.getItem('inputValueLS');
-    const { onChange } = this.props;
-    if (inputValueLS) {
-      onChange(inputValueLS);
-    }
-  }
+const Input = (props: InputProps) => {
+  const { className, disabled, value, onChange, dataAtr } = props;
 
-  componentWillUnmount() {
-    const { value } = this.props;
-    localStorage.setItem('inputValueLS', value);
-  }
-
-  render() {
-    const { className, disabled, value, onChange, dataAtr } = this.props;
-
-    return (
-      <input
-        data-testid={dataAtr}
-        type="text"
-        className={classnames(className, styles.input, {
-          input_disabled: disabled === true,
-        })}
-        disabled={disabled === true && true}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    );
-  }
+  return (
+    <input
+      data-testid={dataAtr}
+      type="text"
+      className={cn(className, styles.input, {
+        input_disabled: disabled === true,
+      })}
+      disabled={disabled === true && true}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+  );
 }
 
 export default Input;

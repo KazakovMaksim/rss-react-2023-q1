@@ -18,6 +18,18 @@ class Search extends React.Component<object, InputState> {
     };
   }
 
+  componentDidMount() {
+    const inputValueLS = localStorage.getItem('inputValueLS');
+    if (inputValueLS) {
+      this.setState({ value: inputValueLS });
+    }
+  }
+
+  componentWillUnmount() {
+    const { value } = this.state;
+    localStorage.setItem('inputValueLS', value);
+  }
+
   handleInput = (newValue: string) => {
     this.setState({ value: newValue });
   };
