@@ -5,9 +5,8 @@ import cardsData from 'data';
 import styles from './MainPage.module.scss';
 import Search from './Search';
 
-class MainPage extends React.PureComponent {
-  render() {
-    const cards = cardsData.map((card) => (
+const MainPage = () => {
+  const cards = cardsData.map((card) => (
       <Card
         key={card.id}
         imgSrc={card.imgSrc}
@@ -15,15 +14,13 @@ class MainPage extends React.PureComponent {
         description={card.description}
         title={card.title}
       />
-    ));
-
-    return (
+  ));
+  return (
       <main className={styles.main}>
         <Search />
         {cards}
       </main>
     );
-  }
 }
 
 export default MainPage;
