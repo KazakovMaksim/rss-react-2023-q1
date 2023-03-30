@@ -6,9 +6,8 @@ import styles from './Button.module.scss';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-class Button extends React.PureComponent<ButtonProps> {
-  render() {
-    const { children, disabled, className } = this.props;
+const Button = (props: ButtonProps) => {
+    const { children, disabled, className } = props;
     return (
       <button
         type="button"
@@ -18,7 +17,6 @@ class Button extends React.PureComponent<ButtonProps> {
         {children}
       </button>
     );
-  }
 }
 
 export default Button;
