@@ -15,6 +15,7 @@ export type FormDataItem = {
   gender: string;
   birthday: string;
   tariff: string;
-  extra: string;
+  extra: string | string[];
   file: File;
+  files?: FileList;
 };
