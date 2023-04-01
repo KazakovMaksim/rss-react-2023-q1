@@ -4,6 +4,7 @@ import { formExtra, validation } from 'constants/index';
 import { useForm } from "react-hook-form";
 
 import styles from './Form.module.scss';
+import validateField from 'utils';
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
   handle: (data: FormDataItem) => void;
@@ -17,6 +18,7 @@ export const Form = (props: FormProps) => {
 
   const {
     register,
+    getValues,
     formState: {
       errors
     },
@@ -101,6 +103,9 @@ export const Form = (props: FormProps) => {
           Birthday:
           <input type="date" {...register('birthday', {
             required: 'fill in the field or choose value',
+            validate: {
+              isLessThen: () => validateField('birth', getValues('birthday')),
+            }
           })} />
         </label>
         <div>
