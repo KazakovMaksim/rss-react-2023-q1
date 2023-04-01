@@ -49,8 +49,13 @@ export const Form = (props: FormProps) => {
           <input {...register('user', {
             required: 'fill in the field or choose value',
             minLength: {
-              value: 3,
+              value: validation.userMinLength,
               message: `field must have min ${validation.userMinLength} letter length`,
+            },
+            pattern:
+            {
+              value: validation.userPattern,
+              message: `name must start with uppercase letter`
             }
           })} placeholder="enter your user name" />
         </label>
@@ -62,6 +67,15 @@ export const Form = (props: FormProps) => {
           Phone:
           <input {...register('phone', {
             required: 'fill in the field or choose value',
+            minLength: {
+              value: validation.phoneMinLength,
+              message: `field must have min ${validation.phoneMinLength} digits length`,
+            },
+            pattern: 
+            {
+              value: validation.phonePattern,
+              message: `phone must have only digits`
+            }
           })} placeholder="enter your phone number" />
         </label>
         <div>
@@ -72,6 +86,11 @@ export const Form = (props: FormProps) => {
           Email:
           <input {...register('email', {
             required: 'fill in the field or choose value',
+            pattern: 
+            {
+              value: validation.emailPattern,
+              message: `entered email is not correct, check it`
+            }
           })} placeholder="enter your email" />
         </label>
         <div>
