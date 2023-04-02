@@ -24,7 +24,10 @@ class ProfileCard extends React.PureComponent<ProfileCardProp> {
           <Clause clauseName={FormFields.Gender} clauseText={gender} />
           <Clause clauseName={FormFields.Birthday} clauseText={birthday} />
           <Clause clauseName={FormFields.Tariff} clauseText={tariff} />
-          <Clause clauseName={FormFields.Extra} clauseText={extra} />
+          <Clause
+            clauseName={FormFields.Extra}
+            clauseText={typeof extra === 'string' ? extra : extra.join(', ')}
+          />
         </div>
         <img src={URL.createObjectURL(file)} alt="user profile" />
         <div>
