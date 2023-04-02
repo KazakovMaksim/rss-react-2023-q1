@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormDataItem } from 'types';
+import { CardItem, FormDataItem } from 'types';
 import { formExtra, validation } from 'constants/index';
 import { useForm } from 'react-hook-form';
 
@@ -8,7 +8,7 @@ import Confirmation from 'components/Confirmation/Confirmation';
 import styles from './Form.module.scss';
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
-  handleCards: (data: FormDataItem) => void;
+  handleCards: (data: CardItem) => void;
 };
 
 export const Form = ({ handleCards }: FormProps) => {
@@ -44,7 +44,6 @@ export const Form = ({ handleCards }: FormProps) => {
 
   return (
     <div>
-      <h1>React Hook Form</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         {isSubmit && (
           <Confirmation onConfirm={() => handleConfirmation()}>All data saved</Confirmation>

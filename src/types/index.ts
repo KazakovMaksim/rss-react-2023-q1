@@ -3,21 +3,28 @@ export enum FormFields {
   Phone = 'phone',
   Email = 'email',
   Gender = 'gender',
-  Extra = 'extra',
   Birthday = 'birthday',
   Tariff = 'tariff',
+  Extra = 'extra',
 }
 
-export type FormDataItem = {
+type FormData = {
   user: string;
   phone: string;
   email: string;
   gender: string;
   birthday: string;
   tariff: string;
-  extra: string | string[];
   file: File;
+};
+
+export type FormDataItem = FormData & {
+  extra: string | string[];
   files?: FileList;
 };
 
-export type CardsItems = FormDataItem[] | [];
+export type CardItem = FormData & {
+  extra: string;
+};
+
+export type CardsItems = CardItem[] | [];

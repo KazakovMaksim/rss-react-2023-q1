@@ -7,17 +7,10 @@ type ClauseProps = {
   clauseName: string;
 };
 
-class Clause extends React.PureComponent<ClauseProps> {
-  render() {
-    const { clauseText, clauseName } = this.props;
-
-    return (
-      <div>
-        <span className={styles.clause}>{clauseName}</span>
-        <span>{`: ${clauseText}`}</span>
-      </div>
-    );
-  }
-}
-
+const Clause = ({ clauseText, clauseName }: ClauseProps) => (
+  <div>
+    <span className={styles.clause}>{clauseName}</span>
+    <span>{`: ${clauseText}`}</span>
+  </div>
+);
 export default Clause;

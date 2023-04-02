@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardsItems, FormDataItem } from 'types';
+import { CardsItems, CardItem } from 'types';
 import ProfileList from './ProfileList';
 import Form from './Form';
 
@@ -8,7 +8,7 @@ import styles from './FormPage.module.scss';
 const FormPage = () => {
   const [cards, setCards] = React.useState<CardsItems>([]);
 
-  const handleSubmit = (formData: FormDataItem) => {
+  const handleSubmit = (formData: CardItem) => {
     const newState = [...cards, formData];
     setCards(newState);
   };

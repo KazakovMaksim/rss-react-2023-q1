@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardsItems, FormDataItem } from 'types';
+import { CardItem, CardsItems } from 'types';
 import ProfileCard from './ProfileCard';
 
 import styles from './ProfileList.module.scss';
@@ -9,7 +9,7 @@ type ProfileListProps = {
 };
 
 const ProfileList = ({ cards }: ProfileListProps) => {
-  const list = cards.map((card: FormDataItem) => {
+  const list = cards.map((card: CardItem) => {
     return <ProfileCard key={crypto.randomUUID()} card={card} />;
   });
   const deliveryList = cards.length ? list : <div>profiles list is still empty</div>;
