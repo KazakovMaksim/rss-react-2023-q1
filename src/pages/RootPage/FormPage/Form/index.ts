@@ -1,3 +1,3 @@
-import Form from './Form';
+import HookForm from './Form';
 
-export default Form;
+export default HookForm;

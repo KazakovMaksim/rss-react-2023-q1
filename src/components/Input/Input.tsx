@@ -25,6 +25,6 @@ const Input = (props: InputProps) => {
       onChange={(e) => onChange(e.target.value)}
     />
   );
-}
+};
 
 export default Input;

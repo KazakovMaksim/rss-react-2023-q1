@@ -7,20 +7,20 @@ import Search from './Search';
 
 const MainPage = () => {
   const cards = cardsData.map((card) => (
-      <Card
-        key={card.id}
-        imgSrc={card.imgSrc}
-        price={card.price}
-        description={card.description}
-        title={card.title}
-      />
+    <Card
+      key={card.id}
+      imgSrc={card.imgSrc}
+      price={card.price}
+      description={card.description}
+      title={card.title}
+    />
   ));
   return (
-      <main className={styles.main}>
-        <Search />
-        {cards}
-      </main>
-    );
-}
+    <main className={styles.main}>
+      <Search />
+      {cards}
+    </main>
+  );
+};
 
 export default MainPage;

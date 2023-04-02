@@ -5,13 +5,9 @@ import Input from 'components/Input';
 
 import styles from './Search.module.scss';
 
-type InputState = {
-  readonly value: string;
-};
-
 const Search = () => {
   const [value, setValue] = React.useState<string>('');
-  let inputValue = React.useRef<string>(value);
+  const inputValue = React.useRef<string>(value);
 
   const handleInput = (newValue: string) => {
     setValue(newValue);
@@ -26,14 +22,15 @@ const Search = () => {
 
     return () => {
       localStorage.setItem('inputValueLS', inputValue.current);
-    }
+    };
   }, []);
 
   useEffect(() => {
     inputValue.current = value;
   }, [value]);
 
-  return <div className={styles.search}>
+  return (
+    <div className={styles.search}>
       <Input
         value={value}
         className={styles.search_input}
@@ -41,7 +38,8 @@ const Search = () => {
         onChange={handleInput}
       />
       <Button className={styles.search_btn}>Find</Button>
-    </div>;
+    </div>
+  );
 };
 
 export default Search;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormDataItem } from 'types';
 import { formExtra, validation } from 'constants/index';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
-import styles from './Form.module.scss';
 import validateField from 'utils';
 import Confirmation from 'components/Confirmation/Confirmation';
+import styles from './Form.module.scss';
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
   handleCards: (data: FormDataItem) => void;
@@ -19,52 +19,54 @@ export const Form = (props: FormProps) => {
   const {
     register,
     getValues,
-    formState: {
-      errors
-    },
+    formState: { errors },
     reset,
     handleSubmit,
-  } = useForm<FormDataItem>({reValidateMode: 'onSubmit'});
+  } = useForm<FormDataItem>({ reValidateMode: 'onSubmit' });
 
   const handleConfirmation = () => {
     setIsSubmit(false);
     reset();
-  }
+  };
 
   const onSubmit = (data: FormDataItem) => {
-      setIsSubmit(true);
-      handleCards({
-        user: data.user,
-        phone: data.phone,
-        email: data.email,
-        gender: data.gender,
-        tariff: data.tariff,
-        birthday: data.birthday,
-        extra: typeof data.extra === 'string' ? data.extra : data.extra.join(', '),
-        file: (data.files as FileList)[0],
-      });
+    setIsSubmit(true);
+    handleCards({
+      user: data.user,
+      phone: data.phone,
+      email: data.email,
+      gender: data.gender,
+      tariff: data.tariff,
+      birthday: data.birthday,
+      extra: typeof data.extra === 'string' ? data.extra : data.extra.join(', '),
+      file: (data.files as FileList)[0],
+    });
   };
 
   return (
     <div>
       <h1>React Hook Form</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        {isSubmit && <Confirmation onConfirm={() => handleConfirmation()}>All data saved</Confirmation>}
+        {isSubmit && (
+          <Confirmation onConfirm={() => handleConfirmation()}>All data saved</Confirmation>
+        )}
 
         <label htmlFor="user">
           User:
-          <input {...register('user', {
-            required: 'fill in the field or choose value',
-            minLength: {
-              value: validation.userMinLength,
-              message: `field must have min ${validation.userMinLength} letter length`,
-            },
-            pattern:
-            {
-              value: validation.userPattern,
-              message: `name must start with uppercase letter`
-            }
-          })} placeholder="enter your user name" />
+          <input
+            {...register('user', {
+              required: 'fill in the field or choose value',
+              minLength: {
+                value: validation.userMinLength,
+                message: `field must have min ${validation.userMinLength} letter length`,
+              },
+              pattern: {
+                value: validation.userPattern,
+                message: `name must start with uppercase letter`,
+              },
+            })}
+            placeholder="enter your user name"
+          />
         </label>
         <div>
           {errors?.user && <span className={styles.form_error}>{errors?.user.message}</span>}
@@ -72,18 +74,20 @@ export const Form = (props: FormProps) => {
 
         <label htmlFor="phone">
           Phone:
-          <input {...register('phone', {
-            required: 'fill in the field or choose value',
-            minLength: {
-              value: validation.phoneMinLength,
-              message: `field must have min ${validation.phoneMinLength} digits length`,
-            },
-            pattern: 
-            {
-              value: validation.phonePattern,
-              message: `phone must have only digits`
-            }
-          })} placeholder="enter your phone number" />
+          <input
+            {...register('phone', {
+              required: 'fill in the field or choose value',
+              minLength: {
+                value: validation.phoneMinLength,
+                message: `field must have min ${validation.phoneMinLength} digits length`,
+              },
+              pattern: {
+                value: validation.phonePattern,
+                message: `phone must have only digits`,
+              },
+            })}
+            placeholder="enter your phone number"
+          />
         </label>
         <div>
           {errors?.phone && <span className={styles.form_error}>{errors?.phone.message}</span>}
@@ -91,14 +95,16 @@ export const Form = (props: FormProps) => {
 
         <label htmlFor="email">
           Email:
-          <input {...register('email', {
-            required: 'fill in the field or choose value',
-            pattern: 
-            {
-              value: validation.emailPattern,
-              message: `entered email is not correct, check it`
-            }
-          })} placeholder="enter your email" />
+          <input
+            {...register('email', {
+              required: 'fill in the field or choose value',
+              pattern: {
+                value: validation.emailPattern,
+                message: `entered email is not correct, check it`,
+              },
+            })}
+            placeholder="enter your email"
+          />
         </label>
         <div>
           {errors?.email && <span className={styles.form_error}>{errors?.email.message}</span>}
@@ -106,22 +112,30 @@ export const Form = (props: FormProps) => {
 
         <label htmlFor="birthday">
           Birthday:
-          <input type="date" {...register('birthday', {
-            required: 'fill in the field or choose value',
-            validate: {
-              isLessThen: () => validateField('birth', getValues('birthday')),
-            }
-          })} />
+          <input
+            type="date"
+            {...register('birthday', {
+              required: 'fill in the field or choose value',
+              validate: {
+                isLessThen: () => validateField('birth', getValues('birthday')),
+              },
+            })}
+          />
         </label>
         <div>
-          {errors?.birthday && <span className={styles.form_error}>{errors?.birthday.message}</span>}
+          {errors?.birthday && (
+            <span className={styles.form_error}>{errors?.birthday.message}</span>
+          )}
         </div>
 
         <label htmlFor="tariff">
           Tariff:
-          <select defaultValue="" {...register('tariff', {
-            required: 'fill in the field or choose value',
-          })}>
+          <select
+            defaultValue=""
+            {...register('tariff', {
+              required: 'fill in the field or choose value',
+            })}
+          >
             <option disabled value="">
               choose tariff
             </option>
@@ -137,15 +151,23 @@ export const Form = (props: FormProps) => {
         <div className={styles.form_gender}>
           Gender:
           <label htmlFor="male">
-            <input type="radio" value="male" {...register('gender', {
-            required: 'fill in the field or choose value',
-          })}/>
+            <input
+              type="radio"
+              value="male"
+              {...register('gender', {
+                required: 'fill in the field or choose value',
+              })}
+            />
             male
           </label>
           <label htmlFor="female">
-            <input type="radio" value="female" {...register('gender', {
-            required: 'fill in the field or choose value',
-          })}/>
+            <input
+              type="radio"
+              value="female"
+              {...register('gender', {
+                required: 'fill in the field or choose value',
+              })}
+            />
             female
           </label>
         </div>
@@ -156,18 +178,22 @@ export const Form = (props: FormProps) => {
         <div className={styles.form_extra}>
           Extra:
           <label htmlFor="alerts">
-            <input type="checkbox" {...register('extra', {
-            required: 'fill in the field or choose value',
-          })}
-            value={alertsText}
+            <input
+              type="checkbox"
+              {...register('extra', {
+                required: 'fill in the field or choose value',
+              })}
+              value={alertsText}
             />
             {alertsText}
           </label>
           <label htmlFor="ads">
-            <input type="checkbox" {...register('extra', {
-            required: 'fill in the field or choose value',
-          })}
-            value={adsText}
+            <input
+              type="checkbox"
+              {...register('extra', {
+                required: 'fill in the field or choose value',
+              })}
+              value={adsText}
             />
             {adsText}
           </label>
@@ -178,9 +204,12 @@ export const Form = (props: FormProps) => {
 
         <label htmlFor="file">
           File:
-          <input type="file" {...register('files', {
-            required: 'fill in the field or choose value',
-          })}/>
+          <input
+            type="file"
+            {...register('files', {
+              required: 'fill in the field or choose value',
+            })}
+          />
         </label>
         <div>
           {errors?.files && <span className={styles.form_error}>{errors?.files.message}</span>}
@@ -189,7 +218,7 @@ export const Form = (props: FormProps) => {
         <input type="submit" value="Send" />
       </form>
     </div>
-  )
+  );
 };
 
 export default Form;

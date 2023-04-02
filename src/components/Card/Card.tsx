@@ -14,15 +14,15 @@ const Card = (props: CardProps) => {
   const { imgSrc, title, description, price } = props;
 
   return (
-      <div className={styles.card}>
-        <div>
-          <img src={imgSrc} alt="" />
-        </div>
-        <h2 className={styles.card_title}>{title}</h2>
-        <h3 className={styles.card_subtitle}>{description}</h3>
-        <p>{`$${price}`}</p>
+    <div className={styles.card}>
+      <div>
+        <img src={imgSrc} alt="" />
       </div>
-    );
-}
+      <h2 className={styles.card_title}>{title}</h2>
+      <h3 className={styles.card_subtitle}>{description}</h3>
+      <p>{`$${price}`}</p>
+    </div>
+  );
+};
 
 export default Card;
