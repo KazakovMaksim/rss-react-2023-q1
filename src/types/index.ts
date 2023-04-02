@@ -19,3 +19,5 @@ export type FormDataItem = {
   file: File;
   files?: FileList;
 };
+
+export type CardsItems = FormDataItem[] | [];
