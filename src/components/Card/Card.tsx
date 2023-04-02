@@ -10,9 +10,7 @@ export type CardProps = {
   onClick?: React.MouseEventHandler;
 };
 
-const Card = (props: CardProps) => {
-  const { imgSrc, title, description, price } = props;
-
+const Card = ({ imgSrc, title, description, price }: CardProps) => {
   return (
     <div className={styles.card}>
       <div>

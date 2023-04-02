@@ -11,8 +11,7 @@ type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
   handleCards: (data: FormDataItem) => void;
 };
 
-export const Form = (props: FormProps) => {
-  const { handleCards } = props;
+export const Form = ({ handleCards }: FormProps) => {
   const [alertsText, adsText] = formExtra;
   const [isSubmit, setIsSubmit] = React.useState(false);
 

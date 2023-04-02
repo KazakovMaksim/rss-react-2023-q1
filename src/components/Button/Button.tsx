@@ -6,8 +6,7 @@ import styles from './Button.module.scss';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = (props: ButtonProps) => {
-  const { children, disabled, className } = props;
+const Button = ({ children, disabled, className }: ButtonProps) => {
   return (
     <button
       type="button"

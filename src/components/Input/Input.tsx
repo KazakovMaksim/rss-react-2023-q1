@@ -10,9 +10,7 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCh
   onChange: (value: string) => void;
 };
 
-const Input = (props: InputProps) => {
-  const { className, disabled, value, onChange, dataAtr } = props;
-
+const Input = ({ className, disabled, value, onChange, dataAtr }: InputProps) => {
   return (
     <input
       data-testid={dataAtr}

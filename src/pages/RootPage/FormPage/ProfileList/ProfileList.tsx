@@ -8,8 +8,7 @@ type ProfileListProps = {
   cards: CardsItems;
 };
 
-const ProfileList = (props: ProfileListProps) => {
-  const { cards } = props;
+const ProfileList = ({ cards }: ProfileListProps) => {
   const list = cards.map((card: FormDataItem) => {
     return <ProfileCard key={crypto.randomUUID()} card={card} />;
   });

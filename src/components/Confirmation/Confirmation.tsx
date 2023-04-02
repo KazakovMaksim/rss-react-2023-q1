@@ -7,9 +7,7 @@ type ConfirmationProps = {
   onConfirm: () => void;
 };
 
-const Confirmation = (props: ConfirmationProps) => {
-  const { children, onConfirm } = props;
-
+const Confirmation = ({ children, onConfirm }: ConfirmationProps) => {
   useEffect(() => {
     setTimeout(() => {
       onConfirm();
