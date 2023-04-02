@@ -5,16 +5,16 @@ import { useForm } from "react-hook-form";
 
 import styles from './Form.module.scss';
 import validateField from 'utils';
+import Confirmation from 'components/Confirmation/Confirmation';
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
-  handle: (data: FormDataItem) => void;
+  handleCards: (data: FormDataItem) => void;
 };
 
-
-
 export const Form = (props: FormProps) => {
-  const { handle } = props;
+  const { handleCards } = props;
   const [alertsText, adsText] = formExtra;
+  const [isSubmit, setIsSubmit] = React.useState(false);
 
   const {
     register,
@@ -26,9 +26,14 @@ export const Form = (props: FormProps) => {
     handleSubmit,
   } = useForm<FormDataItem>({reValidateMode: 'onSubmit'});
 
+  const handleConfirmation = () => {
+    setIsSubmit(false);
+    reset();
+  }
+
   const onSubmit = (data: FormDataItem) => {
-    setTimeout(() => {
-      handle({
+      setIsSubmit(true);
+      handleCards({
         user: data.user,
         phone: data.phone,
         email: data.email,
@@ -38,14 +43,14 @@ export const Form = (props: FormProps) => {
         extra: typeof data.extra === 'string' ? data.extra : data.extra.join(', '),
         file: (data.files as FileList)[0],
       });
-      reset();
-    }, 1000);
   };
 
   return (
     <div>
       <h1>React Hook Form</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        {isSubmit && <Confirmation onConfirm={() => handleConfirmation()}>All data saved</Confirmation>}
+
         <label htmlFor="user">
           User:
           <input {...register('user', {

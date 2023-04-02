@@ -28,7 +28,7 @@ class FormPage extends React.Component<object, FormDataState> {
     return (
       <main className={styles.form_page}>
         <h2 className={styles.form_title}>Profile maintenance</h2>
-        <Form handle={this.handleSubmit} />
+        <Form handleCards={this.handleSubmit} />
         <ProfileList cards={cards} />
       </main>
     );
