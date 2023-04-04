@@ -9,7 +9,6 @@ import FormPage from './pages/RootPage/FormPage';
 class App extends React.PureComponent {
   render() {
     return (
-      // <BrowserRouter basename="/rss-react-2023-q1">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<RootPage />}>
