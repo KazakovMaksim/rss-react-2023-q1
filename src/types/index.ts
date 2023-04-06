@@ -28,3 +28,11 @@ export type CardItem = FormData & {
 };
 
 export type CardsItems = CardItem[] | [];
+
+export interface ProductCard {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  imgSrc: string;
+}

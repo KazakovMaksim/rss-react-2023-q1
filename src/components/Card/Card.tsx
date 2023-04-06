@@ -1,16 +1,16 @@
 import React from 'react';
 
+import { ProductCard } from 'types';
 import styles from './Card.module.scss';
 
 export type CardProps = {
-  imgSrc: string;
-  title: string;
-  price: number;
-  description: string;
+  product: ProductCard;
   onClick?: React.MouseEventHandler;
 };
 
-const Card = ({ imgSrc, title, description, price }: CardProps) => {
+const Card = ({ product }: CardProps) => {
+  const { imgSrc, title, description, price } = product;
+
   return (
     <div className={styles.card}>
       <div>
