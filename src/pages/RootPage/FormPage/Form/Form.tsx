@@ -1,201 +1,140 @@
 import React from 'react';
-import { FormDataItem } from 'types';
-import { formExtra } from 'constants/index';
-import validateField from 'utils';
+import { CardItem, FormDataItem } from 'types';
+import { formExtra, validation } from 'constants/index';
+import { useForm } from 'react-hook-form';
 
+import validateField from 'utils';
+import Confirmation from 'components/Confirmation/Confirmation';
 import styles from './Form.module.scss';
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
-  handle: (data: FormDataItem) => void;
+  handleCards: (data: CardItem) => void;
 };
 
-type FormState = {
-  userErr: string;
-  phoneErr: string;
-  emailErr: string;
-  birthErr: string;
-  genderErr: string;
-  tariffErr: string;
-  extraErr: string;
-  fileErr: string;
-  isSubmit: boolean;
-};
+export const Form = ({ handleCards }: FormProps) => {
+  const [alertsText, adsText] = formExtra;
+  const [isSubmit, setIsSubmit] = React.useState(false);
 
-class Form extends React.PureComponent<FormProps, FormState> {
-  formInput: React.RefObject<HTMLFormElement>;
+  const {
+    register,
+    getValues,
+    formState: { errors },
+    reset,
+    handleSubmit,
+  } = useForm<FormDataItem>({ reValidateMode: 'onSubmit' });
 
-  formUser: React.RefObject<HTMLInputElement>;
-
-  formPhone: React.RefObject<HTMLInputElement>;
-
-  formEmail: React.RefObject<HTMLInputElement>;
-
-  formGenderMale: React.RefObject<HTMLInputElement>;
-
-  formGenderFemale: React.RefObject<HTMLInputElement>;
-
-  formAlert: React.RefObject<HTMLInputElement>;
-
-  formAds: React.RefObject<HTMLInputElement>;
-
-  formBirthday: React.RefObject<HTMLInputElement>;
-
-  formFile: React.RefObject<HTMLInputElement>;
-
-  formTariff: React.RefObject<HTMLSelectElement>;
-
-  constructor(props: FormProps) {
-    super(props);
-    this.formInput = React.createRef<HTMLFormElement>();
-    this.formUser = React.createRef<HTMLInputElement>();
-    this.formPhone = React.createRef<HTMLInputElement>();
-    this.formEmail = React.createRef<HTMLInputElement>();
-    this.formGenderMale = React.createRef<HTMLInputElement>();
-    this.formGenderFemale = React.createRef<HTMLInputElement>();
-    this.formAlert = React.createRef<HTMLInputElement>();
-    this.formAds = React.createRef<HTMLInputElement>();
-    this.formBirthday = React.createRef<HTMLInputElement>();
-    this.formFile = React.createRef<HTMLInputElement>();
-    this.formTariff = React.createRef<HTMLSelectElement>();
-
-    this.state = {
-      userErr: '',
-      phoneErr: '',
-      emailErr: '',
-      birthErr: '',
-      genderErr: '',
-      tariffErr: '',
-      extraErr: '',
-      fileErr: '',
-      isSubmit: false,
-    };
-  }
-
-  handleSubmit = () => {
-    let gender = '';
-    if (this.formGenderMale.current?.checked) {
-      gender = 'male';
-    } else if (this.formGenderFemale.current?.checked) {
-      gender = 'female';
-    }
-
-    const tariff =
-      this.formTariff.current?.value === 'choose' ? '' : this.formTariff.current?.value;
-
-    const birth = this.formBirthday.current?.value ? this.formBirthday.current?.value : '';
-
-    const extra = [this.formAlert.current?.checked, this.formAds.current?.checked].map(
-      (el, idx) => {
-        if (el) {
-          return formExtra[idx];
-        }
-        return '';
-      }
-    );
-
-    const userErr = validateField('user', this.formUser.current?.value);
-    const phoneErr = validateField('phone', this.formPhone.current?.value);
-    const emailErr = validateField('email', this.formEmail.current?.value);
-    const genderErr = validateField('gender', gender);
-    const tariffErr = validateField('tariff', tariff);
-    const birthErr = validateField('birth', birth);
-    const extraErr = validateField('extra', extra.filter((el) => el !== '').join(', '));
-    const fileErr = validateField('file', this.formFile.current?.value);
-
-    this.setState({
-      userErr,
-      phoneErr,
-      emailErr,
-      genderErr,
-      tariffErr,
-      birthErr,
-      extraErr,
-      fileErr,
-    });
-
-    const { handle } = this.props;
-
-    if (
-      !userErr &&
-      !phoneErr &&
-      !emailErr &&
-      !genderErr &&
-      !tariffErr &&
-      !birthErr &&
-      !extraErr &&
-      !fileErr
-    ) {
-      this.setState({ isSubmit: true });
-      setTimeout(() => {
-        this.setState({ isSubmit: false });
-        handle({
-          user: this.formUser.current?.value as string,
-          phone: this.formPhone.current?.value as string,
-          email: this.formEmail.current?.value as string,
-          gender,
-          tariff: this.formTariff.current?.value as string,
-          birthday: this.formBirthday.current?.value as string,
-          extra: extra.filter((el) => el !== '').join(', '),
-          file: (this.formFile.current?.files as FileList)[0],
-        });
-        this.formInput.current?.reset();
-      }, 1000);
-    }
+  const handleConfirmation = () => {
+    setIsSubmit(false);
+    reset();
   };
 
-  render() {
-    const [alertsText, adsText] = formExtra;
-    const {
-      userErr,
-      phoneErr,
-      emailErr,
-      genderErr,
-      tariffErr,
-      birthErr,
-      extraErr,
-      fileErr,
-      isSubmit,
-    } = this.state;
+  const onSubmit = (data: FormDataItem) => {
+    setIsSubmit(true);
+    handleCards({
+      user: data.user,
+      phone: data.phone,
+      email: data.email,
+      gender: data.gender,
+      tariff: data.tariff,
+      birthday: data.birthday,
+      extra: typeof data.extra === 'string' ? data.extra : data.extra.join(', '),
+      file: (data.files as FileList)[0],
+    });
+  };
 
-    return (
-      <form
-        noValidate
-        className={styles.form}
-        ref={this.formInput}
-        onSubmit={(e) => {
-          e.preventDefault();
-          this.handleSubmit();
-        }}
-      >
-        {isSubmit && <div className={styles.form_confirm}>All data saved</div>}
+  return (
+    <div>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        {isSubmit && (
+          <Confirmation onConfirm={() => handleConfirmation()}>All data saved</Confirmation>
+        )}
+
         <label htmlFor="user">
-          User
-          <input placeholder="enter your user name" ref={this.formUser} />
+          User:
+          <input
+            {...register('user', {
+              required: 'fill in the field or choose value',
+              minLength: {
+                value: validation.userMinLength,
+                message: `field must have min ${validation.userMinLength} letter length`,
+              },
+              pattern: {
+                value: validation.userPattern,
+                message: `name must start with uppercase letter`,
+              },
+            })}
+            placeholder="enter your user name"
+          />
         </label>
-        {userErr && <span className={styles.form_error}>{userErr}</span>}
+        <div>
+          {errors?.user && <span className={styles.form_error}>{errors?.user.message}</span>}
+        </div>
 
         <label htmlFor="phone">
-          Phone
-          <input placeholder="enter your phone number" ref={this.formPhone} />
+          Phone:
+          <input
+            {...register('phone', {
+              required: 'fill in the field or choose value',
+              minLength: {
+                value: validation.phoneMinLength,
+                message: `field must have min ${validation.phoneMinLength} digits length`,
+              },
+              pattern: {
+                value: validation.phonePattern,
+                message: `phone must have only digits`,
+              },
+            })}
+            placeholder="enter your phone number"
+          />
         </label>
-        {phoneErr && <span className={styles.form_error}>{phoneErr}</span>}
+        <div>
+          {errors?.phone && <span className={styles.form_error}>{errors?.phone.message}</span>}
+        </div>
 
         <label htmlFor="email">
-          Email
-          <input placeholder="enter your email" type="email" ref={this.formEmail} />
+          Email:
+          <input
+            {...register('email', {
+              required: 'fill in the field or choose value',
+              pattern: {
+                value: validation.emailPattern,
+                message: `entered email is not correct, check it`,
+              },
+            })}
+            placeholder="enter your email"
+          />
         </label>
-        {emailErr && <span className={styles.form_error}>{emailErr}</span>}
+        <div>
+          {errors?.email && <span className={styles.form_error}>{errors?.email.message}</span>}
+        </div>
 
         <label htmlFor="birthday">
-          Birthday
-          <input type="date" ref={this.formBirthday} />
+          Birthday:
+          <input
+            type="date"
+            {...register('birthday', {
+              required: 'fill in the field or choose value',
+              validate: {
+                isLessThen: () => validateField('birth', getValues('birthday')),
+              },
+            })}
+          />
         </label>
-        {birthErr && <span className={styles.form_error}>{birthErr}</span>}
+        <div>
+          {errors?.birthday && (
+            <span className={styles.form_error}>{errors?.birthday.message}</span>
+          )}
+        </div>
 
         <label htmlFor="tariff">
-          Tariff
-          <select defaultValue="choose" ref={this.formTariff}>
-            <option disabled value="choose">
+          Tariff:
+          <select
+            defaultValue=""
+            {...register('tariff', {
+              required: 'fill in the field or choose value',
+            })}
+          >
+            <option disabled value="">
               choose tariff
             </option>
             <option value="base">base</option>
@@ -203,44 +142,81 @@ class Form extends React.PureComponent<FormProps, FormState> {
             <option value="platinum">platinum</option>
           </select>
         </label>
-        {tariffErr && <span className={styles.form_error}>{tariffErr}</span>}
+        <div>
+          {errors?.tariff && <span className={styles.form_error}>{errors?.tariff.message}</span>}
+        </div>
 
         <div className={styles.form_gender}>
-          Gender
+          Gender:
           <label htmlFor="male">
-            <input name="gender" type="radio" value="male" ref={this.formGenderMale} />
+            <input
+              type="radio"
+              value="male"
+              {...register('gender', {
+                required: 'fill in the field or choose value',
+              })}
+            />
             male
           </label>
           <label htmlFor="female">
-            <input name="gender" type="radio" value="female" ref={this.formGenderFemale} />
+            <input
+              type="radio"
+              value="female"
+              {...register('gender', {
+                required: 'fill in the field or choose value',
+              })}
+            />
             female
           </label>
         </div>
-        {genderErr && <span className={styles.form_error}>{genderErr}</span>}
+        <div>
+          {errors?.gender && <span className={styles.form_error}>{errors?.gender.message}</span>}
+        </div>
 
         <div className={styles.form_extra}>
-          Extra
+          Extra:
           <label htmlFor="alerts">
-            <input type="checkbox" ref={this.formAlert} />
+            <input
+              type="checkbox"
+              {...register('extra', {
+                required: 'fill in the field or choose value',
+              })}
+              value={alertsText}
+            />
             {alertsText}
           </label>
           <label htmlFor="ads">
-            <input type="checkbox" ref={this.formAds} />
+            <input
+              type="checkbox"
+              {...register('extra', {
+                required: 'fill in the field or choose value',
+              })}
+              value={adsText}
+            />
             {adsText}
           </label>
         </div>
-        {extraErr && <span className={styles.form_error}>{extraErr}</span>}
+        <div>
+          {errors?.extra && <span className={styles.form_error}>{errors?.extra.message}</span>}
+        </div>
 
         <label htmlFor="file">
-          File
-          <input type="file" ref={this.formFile} />
+          File:
+          <input
+            type="file"
+            {...register('files', {
+              required: 'fill in the field or choose value',
+            })}
+          />
         </label>
-        {fileErr && <span className={styles.form_error}>{fileErr}</span>}
+        <div>
+          {errors?.files && <span className={styles.form_error}>{errors?.files.message}</span>}
+        </div>
 
         <input type="submit" value="Send" />
       </form>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Form;

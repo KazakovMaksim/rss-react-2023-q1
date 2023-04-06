@@ -1,42 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
 
 import styles from './Search.module.scss';
 
-type InputState = {
-  readonly value: string;
-};
+const Search = () => {
+  const [value, setValue] = React.useState<string>('');
+  const inputValue = React.useRef<string>(value);
 
-class Search extends React.Component<object, InputState> {
-  constructor(props: object) {
-    super(props);
-
-    this.state = {
-      value: '',
-    };
-  }
-
-  handleInput = (newValue: string) => {
-    this.setState({ value: newValue });
+  const handleInput = (newValue: string) => {
+    setValue(newValue);
   };
 
-  render() {
-    const { value } = this.state;
+  useEffect(() => {
+    const inputValueLS = localStorage.getItem('inputValueLS');
 
-    return (
-      <div className={styles.search}>
-        <Input
-          value={value}
-          className={styles.search_input}
-          placeholder="Search property"
-          onChange={this.handleInput}
-        />
-        <Button className={styles.search_btn}>Find</Button>
-      </div>
-    );
-  }
-}
+    if (inputValueLS) {
+      setValue(inputValueLS);
+    }
+
+    return () => {
+      localStorage.setItem('inputValueLS', inputValue.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    inputValue.current = value;
+  }, [value]);
+
+  return (
+    <div className={styles.search}>
+      <Input
+        value={value}
+        className={styles.search_input}
+        placeholder="Search property"
+        onChange={handleInput}
+      />
+      <Button className={styles.search_btn}>Find</Button>
+    </div>
+  );
+};
 
 export default Search;

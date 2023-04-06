@@ -1,4 +1,29 @@
 .about {
   height: calc(100vh - 120px);
-  background-color: aqua;
+  padding: 10px;
+
+  &_title {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  &_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    gap: 30px;
+
+    & > img {
+      max-width: 500px;
+    }
+
+    & > p {
+      font-size: 20px;
+      line-height: 130%;
+      font-weight: 600;
+      max-width: 400px;
+    }
+  }
 }

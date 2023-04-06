@@ -52,7 +52,7 @@ const validateField = (fieldName: string, fieldValue?: string | File) => {
     errName = 'fill in the field or choose value';
   }
 
-  return errName;
+  return fieldName === 'birth' && !errName ? true : errName;
 };
 
 export default validateField;
