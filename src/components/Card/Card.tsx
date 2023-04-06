@@ -1,24 +1,29 @@
 import React from 'react';
 
 import { ProductCard } from 'types';
+import Button from 'components/Button';
 import styles from './Card.module.scss';
 
 export type CardProps = {
+  isModalOpened?: boolean;
   product: ProductCard;
-  onClick?: React.MouseEventHandler;
+  onClick?: () => void;
 };
 
-const Card = ({ product }: CardProps) => {
-  const { imgSrc, title, description, price } = product;
+const Card = ({ product, onClick, isModalOpened }: CardProps) => {
+  const { imgSrc, title, description, price, category, rating } = product;
 
   return (
     <div className={styles.card}>
       <div>
-        <img src={imgSrc} alt="" />
+        <img src={imgSrc} alt={title} />
       </div>
       <h2 className={styles.card_title}>{title}</h2>
       <h3 className={styles.card_subtitle}>{description}</h3>
-      <p>{`$${price}`}</p>
+      <p>{`price: $${price}`}</p>
+      {!isModalOpened && <Button onClick={onClick}>Show more</Button>}
+      {isModalOpened && <p>{`category: ${category}`}</p>}
+      {isModalOpened && <p>{`rating: ${rating}`}</p>}
     </div>
   );
 };

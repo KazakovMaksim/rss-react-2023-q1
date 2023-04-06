@@ -19,6 +19,7 @@
 
   &_subtitle {
     padding-top: 6px;
+    padding-bottom: 26px;
     font-weight: 500;
     font-size: 18px;
     line-height: 32px;
@@ -30,10 +31,12 @@
     object-fit: cover;
   }
 
-  & > p:nth-child(2) {
+  & > p:nth-child(4),
+  & > p:nth-child(5),
+  & > p:nth-child(6) {
     @include font(18px, 130%, 700);
-    padding-top: 26px;
     color: #AFADB5;
+    padding-bottom: 18px;
   }
 
   & > div > p {

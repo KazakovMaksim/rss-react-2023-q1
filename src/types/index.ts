@@ -35,4 +35,6 @@ export interface ProductCard {
   price: number;
   description: string;
   imgSrc: string;
+  category: string;
+  rating: number;
 }
