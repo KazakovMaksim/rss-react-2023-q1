@@ -13,16 +13,17 @@ const Search = () => {
     setValue(newValue);
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem('inputValueLS', value);
+  };
+
   useEffect(() => {
     const inputValueLS = localStorage.getItem('inputValueLS');
 
     if (inputValueLS) {
       setValue(inputValueLS);
     }
-
-    return () => {
-      localStorage.setItem('inputValueLS', inputValue.current);
-    };
   }, []);
 
   useEffect(() => {
@@ -31,13 +32,17 @@ const Search = () => {
 
   return (
     <div className={styles.search}>
-      <Input
-        value={value}
-        className={styles.search_input}
-        placeholder="Search property"
-        onChange={handleInput}
-      />
-      <Button className={styles.search_btn}>Find</Button>
+      <form onSubmit={(e) => handleFormSubmit(e)}>
+        <Input
+          value={value}
+          className={styles.search_input}
+          placeholder="Search property"
+          onChange={handleInput}
+        />
+        <Button type="submit" className={styles.search_btn}>
+          Find
+        </Button>
+      </form>
     </div>
   );
 };
