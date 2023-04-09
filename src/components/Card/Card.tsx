@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ProductCard } from 'types';
 import Button from 'components/Button';
+import classNames from 'classnames';
 import styles from './Card.module.scss';
 
 export type CardProps = {
@@ -19,7 +20,13 @@ const Card = ({ product, onClick, isModalOpened }: CardProps) => {
         <img src={imgSrc} alt={title} />
       </div>
       <h2 className={styles.card_title}>{title}</h2>
-      <h3 className={styles.card_subtitle}>{description}</h3>
+      <h3
+        className={classNames(styles.card_subtitle, {
+          [styles.card_subtitle__nonactive]: !isModalOpened,
+        })}
+      >
+        {description}
+      </h3>
       <p>{`price: $${price}`}</p>
       {!isModalOpened && (
         <Button
