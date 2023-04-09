@@ -15,13 +15,16 @@ const modalRoot = document.getElementById('modal') as HTMLElement;
 
 const Modal = ({ onClick, id }: ModalProps) => {
   const [cardForModal, setCardForModal] = useState<ProductCard | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetch = async () => {
       const result = await axios({
         method: 'get',
         url: `${baseURL}/${id}`,
       });
+      setIsLoading(false);
       setCardForModal(result.data);
     };
 
@@ -38,6 +41,7 @@ const Modal = ({ onClick, id }: ModalProps) => {
         <span role="presentation" className={styles.modal_cross} onClick={onClick}>
           x
         </span>
+        {isLoading && <div>Loading...</div>}
         {cardForModal && <Card product={cardForModal} isModalOpened />}
       </div>
     </div>,
