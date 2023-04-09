@@ -1,15 +1,36 @@
+@import 'styles/variables.scss';
+
 .main {
   min-height: calc(100vh - 120px);
   width: 100%;
   font-size: 40px;
   display: flex;
-  justify-content: center;
-  margin: 0 auto;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 40px;
   padding: 10px;
 
+  &_products {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
   &_info {
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &_loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: teal;
   }
 }

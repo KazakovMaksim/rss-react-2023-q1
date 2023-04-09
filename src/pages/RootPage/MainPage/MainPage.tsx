@@ -18,14 +18,17 @@ const MainPage = () => {
   const [cardIdForModal, setCardIdForModal] = useState('');
   const [searchValue, setSearchValue] = useState(searchValueInLS || '');
   const [apiReqErrorName, setApiReqErrorName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getProductsWithSearchParams(searchValue).then((res) => {
       if (typeof res !== 'string') {
         setProductCards(res.data);
       } else {
         setApiReqErrorName(res);
       }
+      setIsLoading(false);
     });
   }, [searchValue]);
 
@@ -42,11 +45,14 @@ const MainPage = () => {
         <Modal onClick={() => setIsModalOpened(!isModalOpened)} id={cardIdForModal} />
       )}
       <Search onSearchChange={setSearchValue} />
-      {productCards.length > 0 &&
-        productCards.map((product) => (
-          <Card key={product.id} product={product} onClick={(id) => cardClickHandle(id)} />
-        ))}
-      {productCards.length === 0 && <div className={styles.main_info}>{infoBlock}</div>}
+      <div className={styles.main_products}>
+        {isLoading && <div className={styles.main_loading}>Loading...</div>}
+        {productCards.length > 0 &&
+          productCards.map((product) => (
+            <Card key={product.id} product={product} onClick={(id) => cardClickHandle(id)} />
+          ))}
+        {productCards.length === 0 && <div className={styles.main_info}>{infoBlock}</div>}
+      </div>
     </main>
   );
 };
