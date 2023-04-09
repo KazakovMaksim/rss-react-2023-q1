@@ -5,7 +5,11 @@ import Input from 'components/Input';
 
 import styles from './Search.module.scss';
 
-const Search = () => {
+type SearchProps = {
+  onSearchChange: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Search = ({ onSearchChange }: SearchProps) => {
   const [value, setValue] = React.useState<string>('');
   const inputValue = React.useRef<string>(value);
 
@@ -15,6 +19,7 @@ const Search = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    onSearchChange(value);
     localStorage.setItem('inputValueLS', value);
   };
 

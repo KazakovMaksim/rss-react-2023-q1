@@ -9,6 +9,10 @@
     padding-left: 75px;
     box-shadow: 0px 4px 20px $shadow;
   }
+  
+  & > form {
+    position: relative;
+  }
 
   &_btn {
     position: absolute;
