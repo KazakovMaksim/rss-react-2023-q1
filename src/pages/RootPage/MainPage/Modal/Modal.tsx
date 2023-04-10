@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ProductCard } from 'types';
 import { baseURL } from 'constants/index';
 import Card from 'components/Card';
+import Loading from 'components/Loading';
 import styles from './Modal.module.scss';
 
 export type ModalProps = {
@@ -41,7 +42,7 @@ const Modal = ({ onClick, id }: ModalProps) => {
         <span role="presentation" className={styles.modal_cross} onClick={onClick}>
           x
         </span>
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <Loading className={styles.modal_loading} />}
         {cardForModal && <Card product={cardForModal} isModalOpened />}
       </div>
     </div>,

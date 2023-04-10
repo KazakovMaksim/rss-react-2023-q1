@@ -40,5 +40,10 @@
       transition: 0.4s;
     }
   }
+
+  &_loading {
+    background-color: $white;
+    border-radius: 10px;
+  }
 }
 

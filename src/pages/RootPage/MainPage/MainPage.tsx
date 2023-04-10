@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Card from 'components/Card';
 import { ProductCard } from 'types';
 import { getProductsWithSearchParams } from 'api';
+import Loading from 'components/Loading';
 import Modal from './Modal';
 import Search from './Search';
 import styles from './MainPage.module.scss';
@@ -46,7 +47,7 @@ const MainPage = () => {
       )}
       <Search onSearchChange={setSearchValue} />
       <div className={styles.main_products}>
-        {isLoading && <div className={styles.main_loading}>Loading...</div>}
+        {isLoading && <Loading />}
         {productCards.length > 0 &&
           productCards.map((product) => (
             <Card key={product.id} product={product} onClick={(id) => cardClickHandle(id)} />
