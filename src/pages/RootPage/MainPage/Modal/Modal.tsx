@@ -12,8 +12,6 @@ export type ModalProps = {
   onClick?: () => void;
 };
 
-const modalRoot = document.getElementById('modal') as HTMLElement;
-
 const Modal = ({ onClick, id }: ModalProps) => {
   const [cardForModal, setCardForModal] = useState<ProductCard | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +44,7 @@ const Modal = ({ onClick, id }: ModalProps) => {
         {cardForModal && <Card product={cardForModal} isModalOpened />}
       </div>
     </div>,
-    modalRoot
+    document.body
   );
 };
 
