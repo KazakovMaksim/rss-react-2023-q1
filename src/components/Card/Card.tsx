@@ -12,12 +12,15 @@ export type CardProps = {
 };
 
 const Card = ({ product, onClick, isModalOpened }: CardProps) => {
-  const { imgSrc, title, description, price, category, rating, id } = product;
+  const { title, description, price, category, rating, id } = product;
 
   return (
     <div className={styles.card}>
       <div>
-        <img src={imgSrc} alt={title} />
+        <img
+          src={`https://mock-server-api-kazakovmaksim.vercel.app/assets/images/${id}.jpg`}
+          alt={title}
+        />
       </div>
       <h2 className={styles.card_title}>{title}</h2>
       <h3
