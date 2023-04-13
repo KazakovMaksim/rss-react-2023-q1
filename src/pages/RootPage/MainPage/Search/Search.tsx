@@ -5,12 +5,22 @@ import Input from 'components/Input';
 
 import styles from './Search.module.scss';
 
-const Search = () => {
+type SearchProps = {
+  onSearchChange: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Search = ({ onSearchChange }: SearchProps) => {
   const [value, setValue] = React.useState<string>('');
   const inputValue = React.useRef<string>(value);
 
   const handleInput = (newValue: string) => {
     setValue(newValue);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearchChange(value);
+    localStorage.setItem('inputValueLS', value);
   };
 
   useEffect(() => {
@@ -19,10 +29,6 @@ const Search = () => {
     if (inputValueLS) {
       setValue(inputValueLS);
     }
-
-    return () => {
-      localStorage.setItem('inputValueLS', inputValue.current);
-    };
   }, []);
 
   useEffect(() => {
@@ -31,13 +37,17 @@ const Search = () => {
 
   return (
     <div className={styles.search}>
-      <Input
-        value={value}
-        className={styles.search_input}
-        placeholder="Search property"
-        onChange={handleInput}
-      />
-      <Button className={styles.search_btn}>Find</Button>
+      <form onSubmit={(e) => handleFormSubmit(e)}>
+        <Input
+          value={value}
+          className={styles.search_input}
+          placeholder="Search property"
+          onChange={handleInput}
+        />
+        <Button type="submit" className={styles.search_btn}>
+          Find
+        </Button>
+      </form>
     </div>
   );
 };

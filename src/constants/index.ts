@@ -15,3 +15,5 @@ export const validation = {
   phonePattern: /[0-9]{9}/,
   emailPattern: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_-]+)(\.[a-zA-Z]{2,5}){1,2}$/,
 };
+
+export const baseURL = 'https://mock-server-api-kazakovmaksim.vercel.app/api/catalog';
