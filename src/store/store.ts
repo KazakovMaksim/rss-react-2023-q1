@@ -1,6 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { reducer as profilesReducer } from './profileCards/profileCards.slice';
 
-const reducer = combineReducers({});
+const reducer = combineReducers({
+  profiles: profilesReducer,
+});
 
 export const store = configureStore({
   reducer,

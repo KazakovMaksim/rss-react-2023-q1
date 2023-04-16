@@ -1,19 +1,17 @@
 import React from 'react';
-import { CardItem, FormDataItem } from 'types';
+import { FormDataItem } from 'types';
 import { formExtra, validation } from 'constants/index';
 import { useForm } from 'react-hook-form';
 
 import validateField from 'utils';
 import Confirmation from 'components/Confirmation/Confirmation';
 import styles from './Form.module.scss';
+import useActions from '../../../../hooks/useActions';
 
-type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
-  handleCards: (data: CardItem) => void;
-};
-
-export const Form = ({ handleCards }: FormProps) => {
+export const Form = () => {
   const [alertsText, adsText] = formExtra;
   const [isSubmit, setIsSubmit] = React.useState(false);
+  const { addProfileCard } = useActions();
 
   const {
     register,
@@ -30,7 +28,7 @@ export const Form = ({ handleCards }: FormProps) => {
 
   const onSubmit = (data: FormDataItem) => {
     setIsSubmit(true);
-    handleCards({
+    addProfileCard({
       user: data.user,
       phone: data.phone,
       email: data.email,

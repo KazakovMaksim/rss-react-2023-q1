@@ -1,18 +1,14 @@
-import React from 'react';
-import { CardItem, CardsItems } from 'types';
 import ProfileCard from './ProfileCard';
 
 import styles from './ProfileList.module.scss';
+import usedTypedSelector from '../../../../hooks/useTypedSelector';
 
-type ProfileListProps = {
-  cards: CardsItems;
-};
-
-const ProfileList = ({ cards }: ProfileListProps) => {
-  const list = cards.map((card: CardItem) => {
+const ProfileList = () => {
+  const { profiles } = usedTypedSelector((state) => state);
+  const list = profiles.map((card) => {
     return <ProfileCard key={crypto.randomUUID()} card={card} />;
   });
-  const deliveryList = cards.length ? list : <div>profiles list is still empty</div>;
+  const deliveryList = profiles.length ? list : <div>profiles list is still empty</div>;
 
   return <div className={styles.list}>{deliveryList}</div>;
 };
