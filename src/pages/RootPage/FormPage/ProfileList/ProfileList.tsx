@@ -1,7 +1,7 @@
+import usedTypedSelector from 'hooks/useTypedSelector';
 import ProfileCard from './ProfileCard';
 
 import styles from './ProfileList.module.scss';
-import usedTypedSelector from '../../../../hooks/useTypedSelector';
 
 const ProfileList = () => {
   const { profiles } = usedTypedSelector((state) => state);

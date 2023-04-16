@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 
 import validateField from 'utils';
 import Confirmation from 'components/Confirmation/Confirmation';
+import useActions from 'hooks/useActions';
 import styles from './Form.module.scss';
-import useActions from '../../../../hooks/useActions';
 
 export const Form = () => {
   const [alertsText, adsText] = formExtra;

@@ -25,6 +25,8 @@
       "types/*": ["types/*"],
       "utils/*": ["utils/*"],
       "api/*": ["api/*"],
+      "store/*": ["store/*"],
+      "hooks/*": ["hooks/*"],
     }
   },
   "include": [
