@@ -6,7 +6,7 @@ import Input from 'components/Input';
 import styles from './Search.module.scss';
 
 type SearchProps = {
-  onSearchChange: React.Dispatch<React.SetStateAction<string>>;
+  onSearchChange: (value: string) => void;
 };
 
 const Search = ({ onSearchChange }: SearchProps) => {
