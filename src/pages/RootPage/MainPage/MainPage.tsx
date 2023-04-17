@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from 'components/Card';
 import Loading from 'components/Loading';
 import { useGetProductsQuery } from 'store/api/api';
 import usedTypedSelector from 'hooks/useTypedSelector';
 import { ErrorItem } from 'types';
+import useActions from 'hooks/useActions';
 import Modal from './Modal';
 import Search from './Search';
 import styles from './MainPage.module.scss';
@@ -16,8 +17,13 @@ export enum InfoMessages {
 const MainPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [cardIdForModal, setCardIdForModal] = useState('');
-  const { searchValue } = usedTypedSelector((state) => state.products);
+  const { searchValue, filteredProductCards } = usedTypedSelector((state) => state.products);
   const { isLoading, error, data: productCards } = useGetProductsQuery(searchValue, {});
+  const { addFilteredProductCards } = useActions();
+
+  useEffect(() => {
+    if (productCards) addFilteredProductCards(productCards);
+  }, [productCards, addFilteredProductCards]);
 
   const cardClickHandle = (id: number) => {
     setCardIdForModal(id.toString());
@@ -36,12 +42,12 @@ const MainPage = () => {
       <Search />
       <div className={styles.main_products}>
         {isLoading && <Loading />}
-        {productCards &&
-          productCards.length > 0 &&
-          productCards.map((product) => (
+        {filteredProductCards &&
+          filteredProductCards.length > 0 &&
+          filteredProductCards.map((product) => (
             <Card key={product.id} product={product} onClick={(id) => cardClickHandle(id)} />
           ))}
-        {(!productCards || productCards?.length === 0) && (
+        {(!filteredProductCards || filteredProductCards?.length === 0) && (
           <div className={styles.main_info}>{infoBlock}</div>
         )}
       </div>

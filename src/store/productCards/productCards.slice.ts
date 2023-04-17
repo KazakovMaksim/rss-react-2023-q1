@@ -18,6 +18,9 @@ export const productCards = createSlice({
     addSearchValue: (state, { payload: search }: PayloadAction<string>) => {
       return { ...state, searchValue: search };
     },
+    addFilteredProductCards: (state, { payload: cards }: PayloadAction<ProductCard[] | []>) => {
+      return { ...state, filteredProductCards: cards };
+    },
   },
 });
 
