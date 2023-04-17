@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Card from 'components/Card';
 import Loading from 'components/Loading';
 import { useGetProductsQuery } from 'store/api/api';
+import usedTypedSelector from 'hooks/useTypedSelector';
 import Modal from './Modal';
 import Search from './Search';
 import styles from './MainPage.module.scss';
@@ -14,18 +15,13 @@ export enum InfoMessages {
 const MainPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [cardIdForModal, setCardIdForModal] = useState('');
-  const [searchValue, setSearchValue] = useState(localStorage.getItem('inputValueLS') || '');
   const [apiReqErrorName, setApiReqErrorName] = useState('');
-
-  const { isLoading, data: productCards } = useGetProductsQuery(searchValue, {});
+  const { searchValue } = usedTypedSelector((state) => state.products);
+  const { isLoading, error, data: productCards } = useGetProductsQuery(searchValue, {});
 
   const cardClickHandle = (id: number) => {
     setCardIdForModal(id.toString());
     setIsModalOpened(!isModalOpened);
-  };
-
-  const handleSearch = (value: string) => {
-    setSearchValue(value);
   };
 
   const infoBlock = apiReqErrorName ? InfoMessages.GettingCardErr : InfoMessages.Empty;
@@ -35,7 +31,7 @@ const MainPage = () => {
       {isModalOpened && (
         <Modal onClick={() => setIsModalOpened(!isModalOpened)} id={cardIdForModal} />
       )}
-      <Search onSearchChange={(value) => handleSearch(value)} />
+      <Search />
       <div className={styles.main_products}>
         {isLoading && <Loading />}
         {productCards &&

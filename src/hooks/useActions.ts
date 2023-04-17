@@ -1,10 +1,12 @@
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { actions } from '../store/profileCards/profileCards.slice';
+import { actions as profileActions } from 'store/profileCards/profileCards.slice';
+import { actions as productsActions } from 'store/productCards/productCards.slice';
 
 const rootActions = {
-  ...actions,
+  ...profileActions,
+  ...productsActions,
 };
 
 const useActions = () => {

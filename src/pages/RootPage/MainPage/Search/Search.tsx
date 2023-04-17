@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
-
+import React from 'react';
 import Button from 'components/Button';
 import Input from 'components/Input';
-
+import useActions from 'hooks/useActions';
+import usedTypedSelector from 'hooks/useTypedSelector';
 import styles from './Search.module.scss';
 
-type SearchProps = {
-  onSearchChange: (value: string) => void;
-};
+const Search = () => {
+  const { searchValue } = usedTypedSelector((state) => state.products);
+  const { addSearchValue } = useActions();
 
-const Search = ({ onSearchChange }: SearchProps) => {
-  const [value, setValue] = React.useState<string>('');
-  const inputValue = React.useRef<string>(value);
+  const [value, setValue] = React.useState<string>(searchValue);
 
   const handleInput = (newValue: string) => {
     setValue(newValue);
@@ -19,21 +17,8 @@ const Search = ({ onSearchChange }: SearchProps) => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearchChange(value);
-    localStorage.setItem('inputValueLS', value);
+    addSearchValue(value);
   };
-
-  useEffect(() => {
-    const inputValueLS = localStorage.getItem('inputValueLS');
-
-    if (inputValueLS) {
-      setValue(inputValueLS);
-    }
-  }, []);
-
-  useEffect(() => {
-    inputValue.current = value;
-  }, [value]);
 
   return (
     <div className={styles.search}>
