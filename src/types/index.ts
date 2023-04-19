@@ -38,3 +38,8 @@ export interface ProductCard {
   category: string;
   rating: number;
 }
+
+export type ErrorItem = {
+  error: string;
+  status: string;
+};
