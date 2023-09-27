@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Input from 'components/Input/';
+import { vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
 
 describe('Testing for Input component', () => {
   test('Value in input depends on props value', () => {
@@ -42,5 +44,15 @@ describe('Testing for Input component', () => {
     rerender(<Input value="" onChange={() => {}} />);
 
     expect(inputElement).not.toBeDisabled();
+  });
+
+  describe('BASE', () => {
+    const onChangeInput = vi.fn();
+    render(<Input value="h" onChange={() => {}} />);
+    const input = screen.getByRole('textbox');
+    test('user change data', async () => {
+      await userEvent.type(input, '34');
+      expect(onChangeInput).toBeCalledWith('h34');
+    });
   });
 });

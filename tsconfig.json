@@ -22,6 +22,11 @@
       "assets/*": ["assets/*"],
       "constants/*": ["constants/*"],
       "styles/*": ["styles/*"],
+      "types/*": ["types/*"],
+      "utils/*": ["utils/*"],
+      "api/*": ["api/*"],
+      "store/*": ["store/*"],
+      "hooks/*": ["hooks/*"],
     }
   },
   "include": [

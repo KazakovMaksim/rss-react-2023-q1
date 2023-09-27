@@ -5,8 +5,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-import path from 'path';
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -17,6 +15,11 @@ export default defineConfig({
       data: '/src/data',
       constants: '/src/constants',
       styles: '/src/styles',
+      types: '/src/types',
+      utils: '/src/utils',
+      api: '/src/api',
+      store: '/src/store',
+      hooks: '/src/hooks',
     },
   },
   test: {
